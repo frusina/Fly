@@ -1,0 +1,169 @@
+<html>
+
+<head>
+
+<script>
+	
+let [a,...c] = [1,8,3,4];
+
+var x = [...c].map( (i) => {
+		return i*2;
+} );
+
+
+var xx = x.reduce( (i,x) => {
+	
+	return Math.min(i,x);
+});
+
+
+function Tree(){
+
+	this.root = null;
+};
+
+
+
+
+Tree.prototype.add = function(value){
+	
+	if (this.root === null){
+		this.root = {left: null, right: null, value: value};
+	}else{
+	
+		var temp = this.root;
+		var prev = null;
+		let lr = 0;
+		
+		while(temp !== null){
+			prev = temp;
+			if (temp.value >= value){
+				temp = temp.left;
+				lr = 0;
+			} 
+			else {
+				lr = 1;
+				temp = temp.right;
+			}
+			
+		}
+		
+		
+		temp = {left: null, right: null, value: value};
+	
+		if (lr === 0) prev.left = temp;
+		else prev.right = temp;
+	
+	}
+	
+	
+
+}; 
+
+
+
+
+var t = new Tree();
+
+t.add(2);
+t.add(5);
+
+console.log(t.root);
+
+
+//console.log(Math.min(...c));
+function DoublyLinkedList(){
+   this.head = null;
+   this.tail = null;
+}
+
+DoublyLinkedList.prototype.push = function(val){
+   
+   if (!this.head){
+		this.head = {value: val, previous:null, next:null };
+		this.tail = this.head;
+   
+   }
+  
+  else{
+
+	this.tail.next = {value: val, previous:this.tail, next:null};
+	
+	this.tail = this.tail.next;
+	  
+     
+  }  
+}
+
+DoublyLinkedList.prototype.remove = function(val){
+
+	var temp = this.head;
+	var res = null;
+	console.log("remove");
+	var l = 0;
+	
+	while (temp != null && l < 20){
+	
+	
+		if (temp.value === val){
+			res = temp;
+			
+			temp.previous.next = temp.next;
+			temp.next.previous = temp.previous;
+			
+			break;
+		}
+		temp = temp.next;
+		l++;
+	}
+
+	
+	return res;
+}
+
+
+
+var dll = new DoublyLinkedList();
+dll.push(2);
+dll.push(3);
+dll.push(4);
+dll.push(5);
+console.log(dll.remove(4));
+
+
+console.log(dll);
+
+
+var temp = dll.tail;
+
+
+while (temp != null){
+
+	console.log(temp.value);
+	
+	temp = temp.previous;
+
+}
+
+
+function f(a,b){
+
+	console.log(a + " " + b);
+
+}
+
+</script>
+
+
+</head>
+
+
+<body onload="">
+
+	
+
+
+</body>
+
+
+</html>
